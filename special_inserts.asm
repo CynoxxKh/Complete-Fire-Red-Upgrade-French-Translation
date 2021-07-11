@@ -5,25 +5,6 @@
 .include "../asm_defines.s"
 .include "../battle_script_macros.s"
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@ Game Speed Up
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-.org 0x890, 0xFF
-main:
-	ldr r2, .SuperBits
-	ldrh r3, [r2]
-	mov r0, #1	
-	bic r3, r0
-	strh r3, [r2]
-loop_label:
-	swi #2
-	ldrh r3, [r2]
-	tst r3, r0
-	beq loop_label
-	bx lr
-
-.align 2
-.SuperBits: .word 0x0300310C
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Dynamic Overworld Palette - part of hook at 0x779c
@@ -742,23 +723,6 @@ SummaryScreenExpDisplay2:
 .org 0x352F16, 0xFF
 	.byte 0x1C
 	
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@ Multichoice Pointers
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-.org 0x3E05B0, 0xFF
-.word MULTICHOICE_STRING_LOADER
-.word 0x2
-.word MULTICHOICE_STRING_LOADER
-.word 0x3
-.word MULTICHOICE_STRING_LOADER
-.word 0x4
-.word MULTICHOICE_STRING_LOADER
-.word 0x5
-.word MULTICHOICE_STRING_LOADER
-.word 0x6
-.word MULTICHOICE_STRING_LOADER
-.word 0x7
-
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Dynamic Overworld Palettes
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
